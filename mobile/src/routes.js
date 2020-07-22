@@ -9,13 +9,13 @@ const Routes = createAppContainer(
     Main: {
       screen: Main,
       navigationOptions: {
-        title: 'Job Radar'
+        title: 'MandaJobs!'
       },
     },
     Profile: {
       screen: Profile,
       navigationOptions: {
-        title: 'Manda jobs'
+        title: 'Perfil'
       },
     },
   }, {
