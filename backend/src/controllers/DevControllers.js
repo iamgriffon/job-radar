@@ -12,7 +12,8 @@ const parseStringAsArray = require('../utils/parseStringAsArray');
 
 module.exports = {
   async store(request, response){
-    const { github_username, techs, latitude, longitude, whatsapp, email } = request.body;
+    let dev;
+    const { github_username, fields, techs, latitude, longitude, whatsapp, email } = request.body;
     const finder = await Dev.findOne({ github_username });
     if(!finder) {
       const apiResponse = await axios.get(`https://api.github.com/users/${github_username}`);
@@ -22,6 +23,7 @@ module.exports = {
       const { name = login, avatar_url, bio } = apiResponse.data;
 
       const techsArray = parseStringAsArray(techs);
+      const fieldsArray = parseStringAsArray(fields);
       const location = {
         type: 'Point',
         coordinates: [longitude, latitude]
@@ -29,6 +31,7 @@ module.exports = {
 
       dev = await Dev.create({
         github_username,
+        fields: fieldsArray,
         name,
         email,
         whatsapp,

@@ -3,14 +3,14 @@ const parseStringAsArray = require('../utils/parseStringAsArray');
 
 module.exports = {
   async index(request, response){
-    const { latitude, longitude, techs } = request.query;
-    const skills = parseStringAsArray(techs);
+    const { latitude, longitude, fields } = request.query;
+    const fieldsArray = parseStringAsArray(fields);
   
     //Agora para buscar pessoas em um raio de 10KM
 
     const devs = await Dev.find({
-      techs: {
-        $in: skills
+      fields: {
+        $in: fieldsArray
       },
       location: {
         $near: {

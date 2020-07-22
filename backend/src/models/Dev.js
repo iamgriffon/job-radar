@@ -4,6 +4,11 @@ const PointSchema = require('./utils/PointSchema');
 const FreelaDevSchema = new mongoose.Schema({
   name: String,
   github_username: String,
+  linkedin_profile: String,
+  fields:{
+    type: [String],
+    required: true,
+  },
   email: {
     type: String,
     required: true
@@ -17,7 +22,7 @@ const FreelaDevSchema = new mongoose.Schema({
   techs: [String],
   location: {
     type: PointSchema,
-    index: '2dsphere'
+    index: '2dsphere',
   }
 });
 
