@@ -8,20 +8,7 @@ module.exports = {
   
     //Agora para buscar pessoas em um raio de 10KM
 
-    const devs = await Dev.find({
-      // fields: {
-      //   $in: fieldsArray
-      // },
-      // // location: {
-      // //   $near: {
-      // //     $geometry: {
-      // //       type: 'Point',
-      // //       coordinates: [longitude, latitude],
-      // //     },
-      // //     $maxDistance: 10000, //em metros
-      // //   },
-      // // },
-    });
+    const devs = await Dev.find({});
     return response.json({devs});
   }
 }

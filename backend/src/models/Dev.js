@@ -13,7 +13,7 @@ const FreelaDevSchema = new mongoose.Schema({
     required: true
   },
   whatsapp: {
-    type: Number,
+    type: String,
     required: true,
   },
   bio: String,

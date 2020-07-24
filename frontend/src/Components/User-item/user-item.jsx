@@ -5,8 +5,8 @@ const UserItem = ({person}) => (
   <li>
   <UserPreviewHeader>
     {
-      person.avatar_url.length ?
-        (<UserPreviewImage src={ person.avatar_url } alt={ person.name } />) :
+      person.avatar_url?
+        (<UserPreviewImage src={ person.avatar_url } alt={ 'Picture not found' } />) :
         (<UserPreviewImage src='https://static2.bigstockphoto.com/1/8/9/large1500/98181947.jpg' alt='A Freelancer' />)
     }
     <UserPreviewInfo>
@@ -19,7 +19,7 @@ const UserItem = ({person}) => (
   <UserPreviewPhone>{ person.whatsapp }</UserPreviewPhone>
 
   {
-    person.github_username.length? 
+    person.github_username? 
     (<UserPreviewLink href={ `https://github.com/${person.github_username}` }> Link para o perfil do GitHub</UserPreviewLink>) :
     null
   }

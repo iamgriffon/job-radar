@@ -12,40 +12,48 @@ const parseStringAsArray = require('../utils/parseStringAsArray');
 
 module.exports = {
   async store(request, response){
-    const { github_username, fields, techs, latitude, longitude, whatsapp, email, name } = request.body;
+    const {
+      name,
+      github_username,
+      fields,
+      techs,
+      whatsapp,
+      latitude,
+      longitude,
+      email,
+      avatar_url,
+    } = request.body;
+
+    console.log(request.body);
+    let dev;
+
     const finder = await Dev.findOne({ email });
     if(!finder) {
-      const apiResponse = await axios.get(`https://api.github.com/users/${github_username}`);
-      console.log(apiResponse);
-      let { avatar_url, bio } = apiResponse.data;
-
-      if(!avatar_url) {
-        avatar_url =  '';
-      }
-
-      if(!bio) {
-        bio =  '';
-      }
+      // const apiResponse = await axios.get(`https://api.github.com/users/${github_username}`);
+      // let { bio } = apiResponse.data;
       const techsArray = parseStringAsArray(techs);
+      console.log(techsArray);
       const fieldsArray = parseStringAsArray(fields);
+      console.log(fieldsArray);
 
       const location = {
         type: 'Point',
         coordinates: [longitude, latitude]
       };
 
-      dev = await Dev.create({
+     dev = await Dev.create({
         github_username,
         fields: fieldsArray,
         name,
         email,
         whatsapp,
         avatar_url,
-        bio,
+        // bio,
         techs: techsArray,
         location,
       })
+      return response.status(200).send(dev);
     }
-    return response.json(dev);
+    return response.status(400).send({error:'User já existe'});
   }, 
 };
