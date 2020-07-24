@@ -28,4 +28,4 @@ const FreelaDevSchema = new mongoose.Schema({
   }
 });
 
-module.exports = mongoose.model('Dev', FreelaDevSchema);
+module.exports = mongoose.model('People', FreelaDevSchema);
